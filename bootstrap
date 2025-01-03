@@ -1,0 +1,16 @@
+#!/bin/env bash
+
+cd /opt/minecraft/
+
+if [ ! -f /opt/minecraft/minecraft_server.jar ]
+then
+
+    curl "https://piston-data.mojang.com/v1/objects/4707d00eb834b446575d89a61a11b5d548d8c001/server.jar" -o /opt/minecraft/minecraft_server.jar
+fi
+
+if [ ! -f /opt/minecraft/eula.txt ]
+then
+    echo "eula=true" > /opt/minecraft/eula.txt
+fi
+
+exec java -Xmx1024M -Xms512M -jar minecraft_server.jar --nogui
